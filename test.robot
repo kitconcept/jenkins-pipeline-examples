@@ -21,5 +21,13 @@ Scenario: Jenkins is up and running
   Wait until page contains  Jenkins
   Page Should Contain  Jenkins
 
+Scenario: Create Pipeline Job
+  Go To  ${SERVER}
+  Wait until page contains  New Item
+  Click Link  New Item
+  Wait until page contains  Enter an item name
+  Input Text  name=Angular Pipeline Example
+  Select radio button  mode  org.jenkinsci.plugins.workflow.job.WorkflowJob
+  Click button  OK
 
 *** Keywords ***
