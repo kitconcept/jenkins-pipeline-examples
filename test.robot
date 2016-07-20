@@ -3,7 +3,7 @@
 ${HOSTNAME}             127.0.0.1
 ${PORT}                 8080
 ${SERVER}               http://${HOSTNAME}:${PORT}/
-${BROWSER}              firefox
+${BROWSER}              chrome
 
 
 *** Settings ***
