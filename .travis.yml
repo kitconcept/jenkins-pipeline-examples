@@ -20,9 +20,8 @@ install:
 - sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 - sudo apt-get update
 - sudo apt-get install jenkins -y
-- sudo /etc/init.d/jenkins restart
+- while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
 - sudo pip install -r requirements.txt
-- sleep 40
 script:
 - pybot test.robot
 notifications:
