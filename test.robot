@@ -31,9 +31,9 @@ Scenario: Install Jenkins Plugins
   Wait until element is visible  xpath=//input[@name='plugin.github.default']
   Select checkbox  plugin.github.default
   Select checkbox  plugin.workflow-aggregator.default
-  Click button  css=#yui-gen1-button
-  Wait until page contains element  css=#scheduleRestart
-  Select checkbox  css=#scheduleRestartCheckbox
+#  Click button  css=#yui-gen1-button
+#  Wait until page contains element  css=#scheduleRestart
+#  Select checkbox  css=#scheduleRestartCheckbox
 
 # Scenario: Create Pipeline Job
 #   Go To  ${SERVER}
