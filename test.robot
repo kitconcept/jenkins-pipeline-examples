@@ -20,7 +20,7 @@ Scenario: Jenkins is up and running
   Go To  ${SERVER}
   Wait until page contains  Jenkins
   Page Should Contain  Jenkins
-  Wait until page contains element  css=#j_username
+  Wait until page contains  Manage Jenkins
 
 # Scenario: Create Pipeline Job
 #   Go To  ${SERVER}

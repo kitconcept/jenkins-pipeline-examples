@@ -76,8 +76,7 @@ Vagrant.configure("2") do |config|
     apt-get install -y jenkins
     apt-get install -y python-pip
     pip install robotframework robotframework-selenium2library
-    /etc/init.d/jenkins restart
-    sleep 10
+    sed -i "s/<useSecurity>true<\/useSecurity>/<useSecurity>false<\/useSecurity>/g" config.xml
     sudo -u jenkins cp /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
     /etc/init.d/jenkins restart
   SHELL
