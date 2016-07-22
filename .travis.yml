@@ -30,7 +30,7 @@ install:
 - sudo service jenkins restart
 - sleep 30
 - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
-- sudo pip install -r requirements.txt
+- pip install -r requirements.txt
 script:
 - pybot test.robot
 notifications:
