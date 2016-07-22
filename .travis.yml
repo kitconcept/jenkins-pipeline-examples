@@ -20,7 +20,8 @@ install:
 - sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 - sudo apt-get update
 - sudo apt-get install jenkins -y
-- sudo service jenkins status
+- sudo service jenkins restart
+- sleep 10
 - whereis jenkins
 - cd /var/lib/jenkins
 - ls -al /var/lib/jenkins
