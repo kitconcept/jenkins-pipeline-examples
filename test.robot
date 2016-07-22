@@ -10,8 +10,8 @@ ${BROWSER}              chrome
 
 Documentation   Jenkins Pipeline Job Acceptance Test
 Library         Selenium2Library  timeout=30  implicit_wait=0
-Suite Setup     Open Browser  ${SERVER}  ${BROWSER}
-Suite Teardown  Close Browser
+Test Setup      Test Setup
+Test Teardown   Close Browser
 
 
 *** Test Cases ***
@@ -29,7 +29,7 @@ Scenario: Install Jenkins Plugins
   Go to  ${SERVER}/pluginManager/available
   Wait until page contains element  xpath=//input[@name='plugin.github.default']
   Wait until element is visible  xpath=//input[@name='plugin.github.default']
-#  Select checkbox  plugin.github.default
+  Select checkbox  plugin.github.default
 #  Select checkbox  plugin.workflow-aggregator.default
 #  Click button  css=#yui-gen1-button
 #  Wait until page contains element  css=#scheduleRestart
@@ -45,3 +45,8 @@ Scenario: Install Jenkins Plugins
 #   Click button  OK
 
 *** Keywords ***
+
+Test Setup
+  Open Browser  ${SERVER}  ${BROWSER}
+  Set Window Size  1024  768
+
