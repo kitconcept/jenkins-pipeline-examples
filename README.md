@@ -50,6 +50,15 @@ The 'Test' pipeline steps unstashes the 'node_modules' stash (lookup by name) an
 Note that there is also 'archive/unarchive'. Though, I would recommend using 'stash/unstash' because it is more lightweight.
 
 
+Test Results
+------------
+
+Include jUnit-based test results::
+
+  sh "bin/test"
+  step([$class: 'JUnitResultArchiver', testResults: 'parts/test/testreports/*.xml'])
+
+
 Email Notifications
 -------------------
 
