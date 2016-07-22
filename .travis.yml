@@ -23,9 +23,7 @@ install:
 - sudo service jenkins status
 - whereis jenkins
 - cd /var/lib/jenkins
-- (sudo -u jenkins cd ~ && pwd)
-- ls ${TRAVIS_BUILD_DIR}/var/lib/jenkins/
-- sudo -u jenkins sed -i "s/<useSecurity>true<\/useSecurity>/<useSecurity>false<\/useSecurity>/g" ${TRAVIS_BUILD_DIR}/var/lib/jenkins/config.xml
+- sudo -u jenkins sed -i "s@<useSecurity>true<\/useSecurity>@<useSecurity>false<\/useSecurity>@g" /var/lib/jenkins/config.xml
 - sudo -u jenkins cp /var/lib/jenkins/jenkins.install.UpgradeWizard.state ${TRAVIS_BUILD_DIR}/var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
 - sudo service jenkins restart
 - sleep 30
