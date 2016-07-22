@@ -17,6 +17,7 @@ node {
 stage 'Acceptance Tests'
 node {
   sh "echo 'Run Acceptance Tests'"
+  exit 1
 }
 
 stage 'Nofification'
