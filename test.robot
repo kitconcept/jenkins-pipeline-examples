@@ -17,13 +17,23 @@ Suite Teardown  Close Browser
 *** Test Cases ***
 
 Scenario: Jenkins is up and running
-  Go To  ${SERVER}
+  Go to  ${SERVER}
   Wait until page contains  Jenkins
   Page Should Contain  Jenkins
   Wait until page contains element  css=#header
   Page should not contain  log in
   Wait until page contains element  css=#tasks
   Page should contain element  xpath=//a[@href='/manage']
+
+Scenario: Install Jenkins Plugins
+  Go to  ${SERVER}/pluginManager/available
+  Wait until page contains element  xpath=//input[@name='plugin.github.default']
+  Select checkbox  plugin.github.default
+  Select checkbox  plugin.workflow-aggregator.default
+  Wait until page contains  Available
+  Click button  css=#yui-gen1-button
+  Wait until page contains element  css=#scheduleRestart
+  Select checkbox  css=#scheduleRestartCheckbox
 
 # Scenario: Create Pipeline Job
 #   Go To  ${SERVER}
