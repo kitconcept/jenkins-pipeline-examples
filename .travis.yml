@@ -21,6 +21,9 @@ install:
 - sudo apt-get update
 - sudo apt-get install jenkins -y
 - service jenkins status
+- sudo -u jenkins sed -i "s/<useSecurity>true<\/useSecurity>/<useSecurity>false<\/useSecurity>/g" config.xml
+- sudo -u jenkins cp /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
+- sudo service jenkins restart
 - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
 - sudo pip install -r requirements.txt
 script:
