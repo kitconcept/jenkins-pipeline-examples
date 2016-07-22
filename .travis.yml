@@ -21,7 +21,7 @@ install:
 - sudo apt-get update
 - sudo apt-get install jenkins -y
 - sudo service jenkins status
-- sudo -u jenkins sed -i "s/<useSecurity>true<\/useSecurity>/<useSecurity>false<\/useSecurity>/g" config.xml
+- sudo -u jenkins sed -i "s/<useSecurity>true<\/useSecurity>/<useSecurity>false<\/useSecurity>/g" /var/lib/jenkins/config.xml
 - sudo -u jenkins cp /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
 - sudo service jenkins restart
 - sleep 30
