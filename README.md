@@ -14,9 +14,41 @@ The Jenkinsfile job configuration already contains the repository URL. Therefore
 Pipeline / Distributed Build
 ----------------------------
 
-If you create pipeline steps
+Jenkins allows to create pipeline steps that are automatically distributed across the available nodes.
 
-    stash includes: 'node_modules/', name: 'node_modules'
+Create pipeline steps::
+
+stage 'Build'
+node {
+  ...
+}
+
+stage 'Test'
+node {
+  ...
+}
+
+Share data between pipelines::
+
+stage 'Build'
+node {
+  checkout scm
+  sh "npm install"
+  stash includes: 'node_modules/', name: 'node_modules'
+}
+
+stage 'Test'
+node {
+  unstash 'node_modules'
+  sh "npm run test"
+}
+
+The 'Build' pipeline step checks out the repository and runs 'npm install'. The build artifacts in 'node_modules' are stashed for later pipeline steps to be used.
+
+The 'Test' pipeline steps unstashes the 'node_modules' stash (lookup by name) and allows to use it (e.g. to run tests on the installed modules).
+
+Note that there is also 'archive/unarchive'. Though, I would recommend using 'stash/unstash' because it is more lightweight.
+
 
 Email Notifications
 -------------------
