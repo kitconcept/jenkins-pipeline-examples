@@ -8,7 +8,7 @@ addons:
       - google-chrome
     packages:
       - google-chrome-stable
-before_script:
+before_install:
   - wget "http://chromedriver.storage.googleapis.com/2.22/chromedriver_linux64.zip"
   - unzip chromedriver_linux64.zip
   - sudo mv chromedriver /usr/local/bin
