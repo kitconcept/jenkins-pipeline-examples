@@ -74,6 +74,7 @@ Vagrant.configure("2") do |config|
     sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
     apt-get update
     apt-get install -y jenkins
+    apt-get install -y git
     apt-get install -y python-pip
     pip install robotframework robotframework-selenium2library
     sed -i "s/<useSecurity>true<\/useSecurity>/<useSecurity>false<\/useSecurity>/g" config.xml
