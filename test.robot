@@ -29,21 +29,20 @@ Scenario: Install Jenkins Plugins
   Go to  ${SERVER}/pluginManager/available
   Wait until page contains element  xpath=//input[@name='plugin.github.default']
   Wait until element is visible  xpath=//input[@name='plugin.github.default']
-  Set Window Size  1024  2048
-  Select checkbox  plugin.github.default
+#  Select checkbox  plugin.github.default
 #  Select checkbox  plugin.workflow-aggregator.default
 #  Click button  css=#yui-gen1-button
 #  Wait until page contains element  css=#scheduleRestart
 #  Select checkbox  css=#scheduleRestartCheckbox
 
-Scenario: Create Pipeline Job
-  Go To  ${SERVER}
-  Wait until page contains  New Item
-  Click Link  New Item
-  Wait until page contains  Enter an item name
-  Input Text  name=Angular Pipeline Example
-  Select radio button  mode  org.jenkinsci.plugins.workflow.job.WorkflowJob
-  Click button  OK
+# Scenario: Create Pipeline Job
+#   Go To  ${SERVER}
+#   Wait until page contains  New Item
+#   Click Link  New Item
+#   Wait until page contains  Enter an item name
+#   Input Text  name=Angular Pipeline Example
+#   Select radio button  mode  org.jenkinsci.plugins.workflow.job.WorkflowJob
+#   Click button  OK
 
 *** Keywords ***
 
