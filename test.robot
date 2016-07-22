@@ -20,7 +20,8 @@ Scenario: Jenkins is up and running
   Go To  ${SERVER}
   Wait until page contains  Jenkins
   Page Should Contain  Jenkins
-  Wait until page contains  Manage Jenkins
+  Wait until page contains element  css=#tasks
+  Page should contain element  xpath=//a[@href='/manage']
 
 # Scenario: Create Pipeline Job
 #   Go To  ${SERVER}
