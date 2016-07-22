@@ -1,10 +1,10 @@
 #!groovy
+stage 'Build'
 node {
-  stage 'Build'
   checkout scm
 }
 
+stage 'Tests'
 node {
-  stage 'Tests'
   sh "echo 'Run Tests'"
 }
