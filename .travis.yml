@@ -21,7 +21,7 @@ install:
 - sudo apt-get update
 - sudo apt-get install jenkins -y
 - sudo pip install -r requirements.txt
-- sleep 20
+- sleep 40
 script:
 - pybot test.robot
 notifications:
