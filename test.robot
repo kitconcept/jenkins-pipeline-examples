@@ -29,6 +29,7 @@ Scenario: Install Jenkins Plugins
   Go to  ${SERVER}/pluginManager/available
   Wait until page contains element  xpath=//input[@name='plugin.github.default']
   Wait until element is visible  xpath=//input[@name='plugin.github.default']
+  Set Window Position  0  1000
   Select checkbox  plugin.github.default
 #  Select checkbox  plugin.workflow-aggregator.default
 #  Click button  css=#yui-gen1-button
