@@ -20,7 +20,6 @@ Scenario: Jenkins is up and running
   Go To  ${SERVER}
   Wait until page contains  Jenkins
   Page Should Contain  Jenkins
-  Wait until page contains  Please wait
   # Wait until page contains  Manage Jenkins
   # Page Should Contain  Manage Jenkins
 
