@@ -20,6 +20,7 @@ install:
 - sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 - sudo apt-get update
 - sudo apt-get install jenkins -y
+- sudo /etc/init.d/jenkins restart
 - sudo pip install -r requirements.txt
 - sleep 40
 script:
