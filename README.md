@@ -135,3 +135,13 @@ Publish HTML::
     ])
 
 Requires `HTML Publisher Plugin<https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin>`.
+
+
+Timeouts
+--------
+
+Tests or build steps are sometimes stuck because of issues beyond our control. Therefore it makes sense to kill a build if it is stuck. For traditional Jenkins jobs there is the `Build-timeout Plugin<https://wiki.jenkins-ci.org/display/JENKINS/Build-timeout+Plugin>`. Though, pipelines give us a far more fine-grained control::
+
+  timeout(time: 5, unit: 'MINUTES') {
+    ...
+  }
