@@ -23,7 +23,7 @@ install:
   - sudo service jenkins restart
   - sleep 10
   - sudo service jenkins status
-  - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do sleep 5; echo "." done;
+  - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do sleep 5; done;
   - sudo -u jenkins sed -i "s@<useSecurity>true<\/useSecurity>@<useSecurity>false<\/useSecurity>@g" /var/lib/jenkins/config.xml
   - sudo -u jenkins cp /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
   - wget http://localhost:8080/jnlpJars/jenkins-cli.jar
@@ -33,7 +33,7 @@ install:
   - sudo service jenkins restart
   - sleep 10
   - sudo service jenkins status
-  - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do sleep 5; echo "." done;
+  - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do sleep 5; done;
 script:
   - pybot test.robot
 notifications:
