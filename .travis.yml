@@ -22,17 +22,18 @@ install:
   - sudo apt-get install jenkins -y
   - sudo service jenkins restart
   - sleep 10
-  - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
+  - sudo service jenkins status
+  - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do sleep 5; echo "." done;
   - sudo -u jenkins sed -i "s@<useSecurity>true<\/useSecurity>@<useSecurity>false<\/useSecurity>@g" /var/lib/jenkins/config.xml
   - sudo -u jenkins cp /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
-  - sudo service jenkins restart
-  - sleep 10
-  - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
   - wget http://localhost:8080/jnlpJars/jenkins-cli.jar
   - java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin git
   - java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin workflow-aggregator
+  - echo 'jenkins.model.Jenkins.instance.securityRealm.createAccount("admin", "admin")' | java -jar jenkins-cli.jar -s http://localhost:8080/ groovy =
   - sudo service jenkins restart
   - sleep 10
+  - sudo service jenkins status
+  - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do sleep 5; echo "." done;
 script:
   - pybot test.robot
 notifications:
