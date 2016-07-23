@@ -28,7 +28,8 @@ install:
   - sleep 10
   - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
   - wget http://localhost:8080/jnlpJars/jenkins-cli.jar
-  - java -jar /var/lib/jenkins/jenkins-cli.jar -s http://localhost:8080/ install-plugin git
+  - java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin git
+  - java -jar jenkins-cli.jar -s http://localhost:8080/ install-plugin workflow-aggregator
   - sudo service jenkins restart
   - sleep 10
 script:
