@@ -32,8 +32,7 @@ install:
   - sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
   - java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
 script:
-#  - pybot test.robot
-  - echo "success"
+  - pybot test.robot
 notifications:
   email:
   - stollenwerk@kitconcept.com
