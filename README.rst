@@ -4,7 +4,7 @@ Jenkins Pipeline Examples (by kitconcept)
 Git Checkout
 ------------
 
-Git Checkout:
+Git Checkout::
 
   checkout scm
 
@@ -18,30 +18,30 @@ Jenkins allows to create pipeline steps that are automatically distributed acros
 
 Create pipeline steps::
 
-stage 'Build'
-node {
-  ...
-}
+  stage 'Build'
+  node {
+    ...
+  }
 
-stage 'Test'
-node {
-  ...
-}
+  stage 'Test'
+  node {
+    ...
+  }
 
-Share data between pipelines::
+  Share data between pipelines::
 
-stage 'Build'
-node {
-  checkout scm
-  sh "npm install"
-  stash includes: 'node_modules/', name: 'node_modules'
-}
+  stage 'Build'
+  node {
+    checkout scm
+    sh "npm install"
+    stash includes: 'node_modules/', name: 'node_modules'
+  }
 
-stage 'Test'
-node {
-  unstash 'node_modules'
-  sh "npm run test"
-}
+  stage 'Test'
+  node {
+    unstash 'node_modules'
+    sh "npm run test"
+  }
 
 The 'Build' pipeline step checks out the repository and runs 'npm install'. The build artifacts in 'node_modules' are stashed for later pipeline steps to be used.
 
@@ -105,6 +105,7 @@ Running Robot Framework test with Selenium requires wrapping the test execution 
         reportFileName: 'report.html',
         unstableThreshold: 0]);
     }
+
 
 Port Allocation
 ---------------
