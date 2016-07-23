@@ -30,6 +30,7 @@ install:
   - sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
   - java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
   - java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-aggregator
+  - java -jar jenkins-cli.jar -s http://localhost:8080 create-job pipeline < job-templates/pipeline.xml
 script:
   - pybot test.robot
 notifications:
