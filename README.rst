@@ -28,7 +28,7 @@ Create pipeline steps::
     ...
   }
 
-  Share data between pipelines::
+Share data between pipelines::
 
   stage 'Build'
   node {
