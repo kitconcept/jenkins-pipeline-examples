@@ -29,6 +29,7 @@ install:
   - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
   - sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
   - java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
+  - java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-aggregator
 script:
   - pybot test.robot
 notifications:
