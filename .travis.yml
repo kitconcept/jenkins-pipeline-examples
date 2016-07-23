@@ -28,7 +28,7 @@ install:
   - sleep 10
   - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
   - sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
-  - sudo -u jenkins echo 'jenkins.model.Jenkins.instance.securityRealm.createAccount("admin", "admin")' | java -jar jenkins-cli.jar -s http://localhost:8080/ groovy =
+  - java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
 script:
   - pybot test.robot
 notifications:
