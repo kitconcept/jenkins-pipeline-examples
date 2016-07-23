@@ -1,6 +1,4 @@
-language: python
-python:
-  - 2.7
+language: java
 dist: trusty
 addons:
   apt:
@@ -15,18 +13,23 @@ before_install:
   - "export DISPLAY=:99.0"
   - "sh -e /etc/init.d/xvfb start"
 install:
-  - pip install -r requirements.txt
+  - sudo apt-get install -y python python-pip
+  - sudo pip install -r requirements.txt
   - wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
   - sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
   - sudo apt-get update
-  - sudo apt-get install jenkins -y
+  - sudo apt-get install  -y jenkins
   - sudo service jenkins restart
   - sleep 10
   - sudo -u jenkins sed -i "s@<useSecurity>true<\/useSecurity>@<useSecurity>false<\/useSecurity>@g" /var/lib/jenkins/config.xml
+  # enable JNLP port, see https://github.com/aespinosa/docker-jenkins/issues/24
+  - sudo -u jenkins sed -i "s@<slaveAgentPort>.*@<slaveAgentPort>49153</slaveAgentPort>@g" /var/lib/jenkins/config.xml
   - sudo -u jenkins cp /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
   - sudo service jenkins restart
   - sleep 10
   - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
+  - sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
+  - java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
 script:
   - pybot test.robot
 notifications:
