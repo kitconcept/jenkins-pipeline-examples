@@ -67,6 +67,9 @@ Vagrant.configure("2") do |config|
   #   push.app = "YOUR_ATLAS_USERNAME/YOUR_APPLICATION_NAME"
   # end
 
+  # https://github.com/Varying-Vagrant-Vagrants/VVV/issues/517
+  config.ssh.shell = "bash -c 'BASH_ENV=/etc/profile exec bash'"
+
   # Enable provisioning with a shell script. Additional provisioners such as
   # Puppet, Chef, Ansible, Salt, and Docker are also available. Please see the
   # documentation for more information about their specific syntax and use.
@@ -79,8 +82,35 @@ Vagrant.configure("2") do |config|
     apt-get install -y python-pip
     pip install robotframework robotframework-selenium2library
     sudo -u jenkins sed -i "s@<useSecurity>true<\/useSecurity>@<useSecurity>false<\/useSecurity>@g" /var/lib/jenkins/config.xml
+    # enable JNLP port, see https://github.com/aespinosa/docker-jenkins/issues/24
+    sudo -u jenkins sed -i "s@<slaveAgentPort>.*@<slaveAgentPort>49153</slaveAgentPort>@g" /var/lib/jenkins/config.xml
     sudo -u jenkins cp /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
-    /etc/init.d/jenkins restart
+    service jenkins restart
+    sleep 10
+    while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
+    wget -q http://localhost:8080/jnlpJars/jenkins-cli.jar -O jenkins-cli.jar
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-aggregator
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-aggregator
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-api
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-basic-steps
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-cps
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-cps-global-lib
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-durable-task-step
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-job
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-scm-step
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-step-api
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-support
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin pipeline-stage-view
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin jquery-detached # pipeline-stage-view dep
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin momentjs # pipeline-stage-view dep
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin handlebars # pipeline-stage-view dep
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin pipeline-rest-api # pipeline-stage-view dep
+    service jenkins restart
+    sleep 10
+    while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
+    (cd jenkins-pipeline-examples && java -jar jenkins-cli.jar -s http://localhost:8080 create-job pipeline < freestyle.xml)
   SHELL
 
 end
