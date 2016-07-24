@@ -40,7 +40,7 @@ Scenario: Create Pipeline Job
   Wait until page contains  New Item
   Click Link  New Item
   Wait until page contains  Enter an item name
-  Input Text  name=Pipeline
+  Input Text  css=#name  Pipeline
   Select radio button  mode  org.jenkinsci.plugins.workflow.job.WorkflowJob
   Click button  OK
 
