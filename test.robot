@@ -35,14 +35,13 @@ Scenario: Jenkins is up and running
 #  Wait until page contains element  css=#scheduleRestart
 #  Select checkbox  css=#scheduleRestartCheckbox
 
-# Scenario: Create Pipeline Job
-#   Go To  ${SERVER}
-#   Wait until page contains  New Item
-#   Click Link  New Item
-#   Wait until page contains  Enter an item name
-#   Input Text  name=Angular Pipeline Example
-#   Select radio button  mode  org.jenkinsci.plugins.workflow.job.WorkflowJob
-#   Click button  OK
+Scenario: Create Pipeline Job
+  Go To  ${SERVER}/view/All/newJob
+  Wait until page contains element  css=#name
+  Input Text  css=#name  Pipeline
+  Click Element  css=.org_jenkinsci_plugins_workflow_job_WorkflowJob
+  Click button  OK
+
 
 *** Keywords ***
 
