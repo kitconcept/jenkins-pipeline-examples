@@ -36,12 +36,10 @@ Scenario: Jenkins is up and running
 #  Select checkbox  css=#scheduleRestartCheckbox
 
 Scenario: Create Pipeline Job
-  Go To  ${SERVER}
-  Wait until page contains  New Item
-  Click Link  New Item
-  Wait until page contains  Enter an item name
+  Go To  ${SERVER}/view/All/newJob
+  Wait until page contains element  css=#name
   Input Text  css=#name  Pipeline
-  Select radio button  mode  org.jenkinsci.plugins.workflow.job.WorkflowJob
+  Click Element  css=.org_jenkinsci_plugins_workflow_job_WorkflowJob
   Click button  OK
 
 
