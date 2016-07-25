@@ -110,7 +110,7 @@ Vagrant.configure("2") do |config|
     service jenkins restart
     sleep 10
     while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
-    (cd jenkins-pipeline-examples && java -jar jenkins-cli.jar -s http://localhost:8080 create-job pipeline < freestyle.xml)
+    (cd jenkins-pipeline-examples && java -jar ../jenkins-cli.jar -s http://localhost:8080 create-job pipeline < freestyle.xml)
   SHELL
 
 end
