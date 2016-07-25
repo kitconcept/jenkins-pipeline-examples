@@ -79,6 +79,7 @@ Robot Framework
 
 Publish Robot Framework test results::
 
+  sh "pybot --xunit output.xml tests/acceptance"
   step([$class: 'RobotPublisher',
     disableArchiveOutput: false,
     logFileName: 'log.html',
@@ -88,6 +89,8 @@ Publish Robot Framework test results::
     passThreshold: 100,
     reportFileName: 'report.html',
     unstableThreshold: 0]);
+
+Make sure `pybot` runs with `--xunit output.xml` option to create the output the Robot Framework Plugin can process.
 
 Requires `Robot Framework Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Robot+Framework+Plugin>`_.
 
