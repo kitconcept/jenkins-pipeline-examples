@@ -90,6 +90,7 @@ Vagrant.configure("2") do |config|
     while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
     wget -q http://localhost:8080/jnlpJars/jenkins-cli.jar -O jenkins-cli.jar
     java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
+    java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin checkstyle
     java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-aggregator
     java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
     java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin workflow-aggregator
