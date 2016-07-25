@@ -8,7 +8,12 @@ node {
 
 stage 'Static Code Analysis'
 node {
-  sh "echo 'Run Static Code Analysis'"
+  unstash 'node_modules'
+  sh "npm run lint"
+  step([$class: 'CheckStylePublisher',
+    pattern: '**/eslint.xml',
+    unstableTotalAll: '0',
+    usePreviousBuildAsReference: true])
 }
 
 stage 'Unit Tests'

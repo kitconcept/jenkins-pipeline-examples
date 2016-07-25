@@ -1,0 +1,20 @@
+{
+  "name": "jenkins-pipeline-examples",
+  "version": "1.0.0",
+  "description": "Jenkins Pipeline Example for AngularJS (by kitconcept)",
+  "main": "index.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "repository": {
+    "type": "git",
+    "url": "https://github.com/kitconcept/jenkins-pipeline-examples.git"
+  },
+  "keywords": [],
+  "author": "",
+  "license": "ISC",
+  "bugs": {
+    "url": "https://github.com/kitconcept/jenkins-pipeline-examples/issues"
+  },
+  "homepage": "https://github.com/kitconcept/jenkins-pipeline-examples"
+}
