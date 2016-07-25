@@ -4,6 +4,7 @@
   "description": "Jenkins Pipeline Example for AngularJS (by kitconcept)",
   "main": "index.js",
   "scripts": {
+    "lint": "eslint -f checkstyle . > eslint.xml || true",
     "test": "echo \"Error: no test specified\" && exit 1"
   },
   "repository": {
