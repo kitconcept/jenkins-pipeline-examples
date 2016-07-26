@@ -186,5 +186,15 @@ if/else::
       y = true
   }
 
+try/catch::
 
-See `this <http://groovy-lang.org/semantics.html#_if_else>`_ for further details.
+  try {
+    ...
+  } catch (e) {
+    println e
+  } finally {
+    // always executed
+    ...
+  }
+
+See `this <http://groovy-lang.org/semantics.html>`_ for further details.
