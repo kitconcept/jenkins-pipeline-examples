@@ -161,3 +161,30 @@ Tests or build steps are sometimes stuck because of issues beyond our control. T
   timeout(time: 5, unit: 'MINUTES') {
     ...
   }
+
+
+Groovy Basics
+-------------
+
+variables::
+
+  String x = 'foo'
+  def y = false  // we don't care about the type
+
+
+if not::
+
+  if ( !x ) {
+      x = true
+  }
+
+if/else::
+
+  if ( x ) {
+      x = false
+  } else {
+      y = true
+  }
+
+
+See `this <http://groovy-lang.org/semantics.html#_if_else>`_ for further details.
