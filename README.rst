@@ -162,6 +162,29 @@ Tests or build steps are sometimes stuck because of issues beyond our control. T
     ...
   }
 
+.. note: It seems timeout does not work well when wrapped around more than one single command.
+
+
+Git Commit
+----------
+
+Unfortunately it seems the pipeline plugin does not provide an easy way to access the changelog. The only way to do this is to check the local git repo::
+
+  sh('git log -1 > GIT_COMMIT_MESSAGE')
+  git_commit_message=readFile('GIT_COMMIT_MESSAGE')
+
+  sh('git show -1 > GIT_COMMIT_DIFF')
+  git_commit_diff=readFile('GIT_COMMIT_DIFF')
+
+  sh('git log -1 --format="%aN <%aE>" --reverse > GIT_COMMIT_AUTHOR')
+  git_commit_author=readFile('GIT_COMMIT_AUTHOR')
+
+  sh('git --no-pager log -1 --pretty=format:"%an" > GIT_COMMIT_AUTHOR_NAME')
+  git_commit_author_name=readFile('GIT_COMMIT_AUTHOR_NAME')
+
+  sh('git --no-pager log -1 --pretty=format:"%ae" > GIT_COMMIT_AUTHOR_EMAIL')
+  git_commit_author_email=readFile('GIT_COMMIT_AUTHOR_EMAIL')
+
 
 Groovy Basics
 -------------
