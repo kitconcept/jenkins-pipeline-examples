@@ -50,6 +50,19 @@ The 'Test' pipeline steps unstashes the 'node_modules' stash (lookup by name) an
 Note that there is also 'archive/unarchive'. Though, I would recommend using 'stash/unstash' because it is more lightweight.
 
 
+Stop Build Execution
+--------------------
+
+Sometimes you want to stop execution of the build pipeline if one important build step fails (e.g. you might not want to automatically deploy a build that failed on the acceptance testing stage)::
+
+    try {
+      sh "bin/test"
+    } catch (e) {
+      // stop execution
+      throw e
+    }
+
+
 Test Results
 ------------
 
