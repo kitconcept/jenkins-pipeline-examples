@@ -11,6 +11,12 @@ Git Checkout::
 The Jenkinsfile job configuration already contains the repository URL. Therefore a checkout is as simple as that. See `this <http://stackoverflow.com/questions/38198878/jenkins-pipeline-build-github-pull-request#answer-38212467>`_ for details.
 
 
+Clean Workspace
+---------------
+
+TODO: Checkout clean workspace for every single build.
+
+
 Pipeline / Distributed Build
 ----------------------------
 
