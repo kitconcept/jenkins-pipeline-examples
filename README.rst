@@ -14,7 +14,9 @@ The Jenkinsfile job configuration already contains the repository URL. Therefore
 Clean Workspace
 ---------------
 
-TODO: Checkout clean workspace for every single build.
+Clean workspace::
+
+  deleteDir()
 
 
 Pipeline / Distributed Build
