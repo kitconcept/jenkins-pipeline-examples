@@ -18,6 +18,8 @@ Clean workspace::
 
   deleteDir()
 
+See `Jenkins workflow basic steps docs <https://jenkins.io/doc/pipeline/steps/workflow-basic-steps/#code-deletedir-code-recursively-delete-the-current-directory-from-the-workspace>`_ for more details.
+
 
 Pipeline / Distributed Build
 ----------------------------
@@ -55,7 +57,7 @@ The 'Build' pipeline step checks out the repository and runs 'npm install'. The 
 
 The 'Test' pipeline steps unstashes the 'node_modules' stash (lookup by name) and allows to use it (e.g. to run tests on the installed modules).
 
-Note that there is also 'archive/unarchive'. Though, I would recommend using 'stash/unstash' because it is more lightweight.
+Note that files are discarded at the end of the build. If you want to keep the artifacts use 'stash/unstash'.
 
 
 Test Results
