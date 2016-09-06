@@ -169,3 +169,16 @@ Tests or build steps are sometimes stuck because of issues beyond our control. T
   timeout(time: 5, unit: 'MINUTES') {
     ...
   }
+
+
+Lock Resources
+--------------
+
+Lock a resource that requires exclusive access::
+
+  lock('my-resource-name') {
+    echo 'Do something here that requires unique access to the resource'
+    // any other build will wait until the one locking the resource leaves this block
+  }
+
+Requires `Lockable Resources Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Lockable+Resources+Plugin>`_.
