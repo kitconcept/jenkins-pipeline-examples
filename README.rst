@@ -104,19 +104,34 @@ Requires `Robot Framework Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Ro
 
 Running Robot Framework test with Selenium requires wrapping the test execution into an Xvfb wrapper::
 
-    wrap([$class: 'Xvfb']) {
-      sh ".env/bin/pybot tests/acceptance"
-      step([$class: 'RobotPublisher',
-        disableArchiveOutput: false,
-        logFileName: 'log.html',
-        otherFiles: '',
-        outputFileName: 'output.xml',
-        outputPath: '.',
-        passThreshold: 100,
-        reportFileName: 'report.html',
-        unstableThreshold: 0]);
-    }
+  wrap([$class: 'Xvfb']) {
+    sh ".env/bin/pybot tests/acceptance"
+    step([$class: 'RobotPublisher',
+      disableArchiveOutput: false,
+      logFileName: 'log.html',
+      otherFiles: '',
+      outputFileName: 'output.xml',
+      outputPath: '.',
+      passThreshold: 100,
+      reportFileName: 'report.html',
+      unstableThreshold: 0]);
+  }
 
+Robot for Plone::
+
+  bin/test --all --xml
+  step([
+    $class: 'RobotPublisher',
+    disableArchiveOutput: false,
+    logFileName: 'robot_log.html',
+    onlyCritical: true,
+    otherFiles: '**/*.png',
+    outputFileName: 'robot_output.xml',
+    outputPath: 'parts/test',
+    passThreshold: 100,
+    reportFileName: 'robot_report.html',
+    unstableThreshold: 0
+  ]);
 
 Port Allocation
 ---------------
