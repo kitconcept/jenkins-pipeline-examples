@@ -35,12 +35,14 @@ Scenario: Jenkins is up and running
 #  Wait until page contains element  css=#scheduleRestart
 #  Select checkbox  css=#scheduleRestartCheckbox
 
-Scenario: Create Pipeline Job
-  Go To  ${SERVER}/view/All/newJob
-  Wait until page contains element  css=#name
-  Input Text  css=#name  Pipeline
-  Click Element  css=.org_jenkinsci_plugins_workflow_job_WorkflowJob
-  Click button  OK
+Scenario: Run Pipeline Job
+  Go To  ${SERVER}/job/pipeline/
+  Wait until page contains  Build Now
+  Click link  Build Now
+  Wait until page contains  Average stage times
+  Go to  ${SERVER}/job/pipeline/1/console
+  Wait until page contains  Console Output
+  Page should contain  SUCCESS
 
 
 *** Keywords ***
