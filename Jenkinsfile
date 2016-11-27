@@ -3,7 +3,7 @@ stage('Build') {
   node {
     checkout scm
   }
-)
+}
 
 stage('Static Code Analysis') {
   node {
