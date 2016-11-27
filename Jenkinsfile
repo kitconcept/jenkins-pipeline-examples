@@ -3,7 +3,7 @@ stage('Build') {
   node {
     checkout scm
   }
-)
+}
 
 stage('Static Code Analysis') {
   node {
@@ -20,7 +20,6 @@ stage('Unit Tests') {
 stage('Acceptance Tests') {
   node {
     sh "echo 'Run Acceptance Tests'"
-    exit 1
   }
 }
 

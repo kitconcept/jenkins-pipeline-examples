@@ -50,8 +50,7 @@ install:
   - sudo service jenkins restart
   - sleep 10
   - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
-  - cat job-templates/pipeline.xml
-  - java -jar jenkins-cli.jar -s http://localhost:8080 create-job pipeline < freestyle.xml
+  - java -jar jenkins-cli.jar -s http://localhost:8080 create-job pipeline < pipeline.xml
 script:
   - pybot test.robot
 notifications:
