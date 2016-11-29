@@ -201,3 +201,29 @@ Lock a resource that requires exclusive access::
   }
 
 Requires `Lockable Resources Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Lockable+Resources+Plugin>`_.
+
+
+Groovy Variables
+----------------
+
+Load file content into Groovy variable::
+
+  version=readFile('src/client/version.txt')
+
+Use Groovy variable::
+
+  currentBuild.description = 'VNCuxf Mail (${version})'
+
+
+Global Variables
+----------------
+
+Current Build::
+
+  currentBuild.result
+  currentBuild.displayName
+  currentBuild.description
+
+Environment::
+
+  env.path
