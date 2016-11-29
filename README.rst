@@ -147,6 +147,44 @@ In order to scale Jenkins, your builds need to be able to run in parallel. You c
 The `Port Allocator Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Port+Allocator+Plugin>`_ is currently not compatible with pipeline jobs. Therefore we use a simple Python script to do the trick (make sure you have a Python interpreter on your machine).
 
 
+Static Code Analysis
+--------------------
+
+Pep8/Flake8:
+
+  timeout(time: 5, unit: 'MINUTES') {
+    sh 'bin/code-analysis'
+    step([$class: 'WarningsPublisher',
+      parserConfigurations: [[
+        parserName: 'Pep8',
+        pattern: 'parts/code-analysis/flake8.log'
+      ]],
+      unstableTotalAll: '0',
+      failedTotalAll: '0',
+      usePreviousBuildAsReference: true
+    ])
+  }
+
+TSLint::
+
+  timeout(time: 5, unit: 'MINUTES') {
+    sh 'npm run lint:ci'
+    step([$class: 'WarningsPublisher',
+      parserConfigurations: [[
+        parserName: 'JSLint',
+        pattern: 'pmd.xml'
+      ]],
+      unstableTotalAll: '0',
+      failedTotalAll: '0',
+      usePreviousBuildAsReference: true
+    ])
+  }
+
+Requires `Warnings Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Warnings+Plugin>`_.
+
+There is no documentation whatsoever available of how to use this plugin with Jenkins pipelines. See this `github commit <https://github.com/jenkinsci/warnings-plugin/commit/ee546a8f9de5dab58925e883c413d34659519696>`_. for details.
+
+
 Linting
 -------
 
