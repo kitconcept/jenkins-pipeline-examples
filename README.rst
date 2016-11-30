@@ -160,10 +160,11 @@ Pep8/Flake8:
         pattern: 'parts/code-analysis/flake8.log'
       ]],
       unstableTotalAll: '0',
-      failedTotalAll: '0',
       usePreviousBuildAsReference: true
     ])
   }
+
+We use the 'Pep8' parser and the pattern is the path to the log file created by either pep8 or flake8. 'unstableTotalAll' = 0 makes sure the build is marked unstable if there is a single violation. If you want the build to fail on violations, use "failedTotalAll: '0'". It is not recommended to use any other threshold than '0' for those settings.
 
 TSLint::
 
@@ -175,7 +176,6 @@ TSLint::
         pattern: 'pmd.xml'
       ]],
       unstableTotalAll: '0',
-      failedTotalAll: '0',
       usePreviousBuildAsReference: true
     ])
   }
