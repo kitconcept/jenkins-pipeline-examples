@@ -64,6 +64,61 @@ The 'Test' pipeline steps unstashes the 'node_modules' stash (lookup by name) an
 Note that files are discarded at the end of the build. If you want to keep the artifacts use 'stash/unstash'.
 
 
+Declarative Pipeline
+--------------------
+
+Cloudbees announced a new declarative pipeline syntax in December 2016:
+
+https://jenkins.io/blog/2016/12/19/declarative-pipeline-beta/?utm_source=feedburner&utm_medium=twitter&utm_campaign=Feed%3A+ContinuousBlog+%28Jenkins%29
+
+https://github.com/jenkinsci/pipeline-model-definition-plugin/wiki/getting%20started
+
+https://github.com/jenkinsci/pipeline-model-definition-plugin/blob/master/SYNTAX.md
+
+This allows to write a cleaner pipeline::
+
+  #!groovy
+  pipeline {
+    stages {
+      stage('Build') {
+        node {
+          checkout scm
+        }
+      }
+
+      stage('Static Code Analysis') {
+        node() {
+          sh "echo 'Run Static Code Analysis'"
+        }
+      }
+
+      stage('Unit Tests') {
+        node() {
+          sh "echo 'Run Tests'"
+        }
+      }
+
+      stage('Acceptance Tests') {
+        node() {
+          sh "echo 'Run Acceptance Tests'"
+        }
+      }
+    }
+    post {
+      always {
+        deleteDir()
+      }
+      success {
+        mail to:"me@example.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Yay, we passed."
+      }
+      failure {
+        mail to:"me@example.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Boo, we failed."
+      }
+    }
+  }
+
+todo...
+
 Test Results
 ------------
 
