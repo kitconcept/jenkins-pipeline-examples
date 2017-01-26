@@ -9,7 +9,7 @@ clean:
 
 setup:
 	@echo "Setup"
-	virtualenv-2.7 .py27
+	virtualenv .py27
 	.py27/bin/pip install -r requirements.txt
 
 test:
