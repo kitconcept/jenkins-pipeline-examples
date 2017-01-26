@@ -8,12 +8,16 @@ pipeline {
   stages {
    stage("Build") {
       steps {
-        checkout scm
+        node() {
+          checkout scm
+        }
       }
     }
     stage("Static Code Analysis"){
       steps {
-        sh "echo 'Run Static Code Analysis'"
+        node() {
+          sh "echo 'Run Static Code Analysis'"
+        }
       }
     }
   }
