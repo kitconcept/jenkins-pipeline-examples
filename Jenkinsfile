@@ -1,20 +1,15 @@
 #!groovy
 pipeline {
   stages {
-    stage('Build') {
-      checkout scm
+   stage("Build") {
+      steps {
+        checkout scm
+      }
     }
-
-    stage('Static Code Analysis') {
-      sh "echo 'Run Static Code Analysis'"
-    }
-
-    stage('Unit Tests') {
-      sh "echo 'Run Tests'"
-    }
-
-    stage('Acceptance Tests') {
-      sh "echo 'Run Acceptance Tests'"
+    stage("Static Code Analysis"){
+      steps {
+        sh "echo 'Run Static Code Analysis'"
+      }
     }
   }
   post {
