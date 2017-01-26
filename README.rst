@@ -64,6 +64,61 @@ The 'Test' pipeline steps unstashes the 'node_modules' stash (lookup by name) an
 Note that files are discarded at the end of the build. If you want to keep the artifacts use 'stash/unstash'.
 
 
+Declarative Pipeline
+--------------------
+
+Cloudbees announced a new declarative pipeline syntax in December 2016:
+
+https://jenkins.io/blog/2016/12/19/declarative-pipeline-beta/?utm_source=feedburner&utm_medium=twitter&utm_campaign=Feed%3A+ContinuousBlog+%28Jenkins%29
+
+https://github.com/jenkinsci/pipeline-model-definition-plugin/wiki/getting%20started
+
+https://github.com/jenkinsci/pipeline-model-definition-plugin/blob/master/SYNTAX.md
+
+This allows to write a cleaner pipeline::
+
+  #!groovy
+  pipeline {
+    stages {
+      stage('Build') {
+        node {
+          checkout scm
+        }
+      }
+
+      stage('Static Code Analysis') {
+        node() {
+          sh "echo 'Run Static Code Analysis'"
+        }
+      }
+
+      stage('Unit Tests') {
+        node() {
+          sh "echo 'Run Tests'"
+        }
+      }
+
+      stage('Acceptance Tests') {
+        node() {
+          sh "echo 'Run Acceptance Tests'"
+        }
+      }
+    }
+    post {
+      always {
+        deleteDir()
+      }
+      success {
+        mail to:"me@example.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Yay, we passed."
+      }
+      failure {
+        mail to:"me@example.com", subject:"FAILURE: ${currentBuild.fullDisplayName}", body: "Boo, we failed."
+      }
+    }
+  }
+
+todo...
+
 Test Results
 ------------
 
@@ -147,6 +202,44 @@ In order to scale Jenkins, your builds need to be able to run in parallel. You c
 The `Port Allocator Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Port+Allocator+Plugin>`_ is currently not compatible with pipeline jobs. Therefore we use a simple Python script to do the trick (make sure you have a Python interpreter on your machine).
 
 
+Static Code Analysis
+--------------------
+
+Pep8/Flake8:
+
+  timeout(time: 5, unit: 'MINUTES') {
+    sh 'bin/code-analysis'
+    step([$class: 'WarningsPublisher',
+      parserConfigurations: [[
+        parserName: 'Pep8',
+        pattern: 'parts/code-analysis/flake8.log'
+      ]],
+      unstableTotalAll: '0',
+      usePreviousBuildAsReference: true
+    ])
+  }
+
+We use the 'Pep8' parser and the pattern is the path to the log file created by either pep8 or flake8. 'unstableTotalAll' = 0 makes sure the build is marked unstable if there is a single violation. If you want the build to fail on violations, use "failedTotalAll: '0'". It is not recommended to use any other threshold than '0' for those settings.
+
+TSLint::
+
+  timeout(time: 5, unit: 'MINUTES') {
+    sh 'npm run lint:ci'
+    step([$class: 'WarningsPublisher',
+      parserConfigurations: [[
+        parserName: 'JSLint',
+        pattern: 'pmd.xml'
+      ]],
+      unstableTotalAll: '0',
+      usePreviousBuildAsReference: true
+    ])
+  }
+
+Requires `Warnings Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Warnings+Plugin>`_.
+
+There is no documentation whatsoever available of how to use this plugin with Jenkins pipelines. See this `github commit <https://github.com/jenkinsci/warnings-plugin/commit/ee546a8f9de5dab58925e883c413d34659519696>`_. for details.
+
+
 Linting
 -------
 
@@ -201,3 +294,29 @@ Lock a resource that requires exclusive access::
   }
 
 Requires `Lockable Resources Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Lockable+Resources+Plugin>`_.
+
+
+Groovy Variables
+----------------
+
+Load file content into Groovy variable::
+
+  version=readFile('src/client/version.txt')
+
+Use Groovy variable::
+
+  currentBuild.description = 'VNCuxf Mail (${version})'
+
+
+Global Variables
+----------------
+
+Current Build::
+
+  currentBuild.result
+  currentBuild.displayName
+  currentBuild.description
+
+Environment::
+
+  env.path
