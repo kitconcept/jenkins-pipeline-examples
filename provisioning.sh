@@ -2,6 +2,10 @@
 sudo apt-get install -y python-pip
 pip install robotframework
 pip install robotframework-selenium2library
+# mailserver
+sudo debconf-set-selections <<< "postfix postfix/mailname string your.hostname.com"
+sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+sudo apt-get install -y postfix
 # jenkins
 wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
 sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
