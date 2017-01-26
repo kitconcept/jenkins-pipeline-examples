@@ -2,27 +2,19 @@
 pipeline {
   stages {
     stage('Build') {
-      node {
-        checkout scm
-      }
+      checkout scm
     }
 
     stage('Static Code Analysis') {
-      node() {
-        sh "echo 'Run Static Code Analysis'"
-      }
+      sh "echo 'Run Static Code Analysis'"
     }
 
     stage('Unit Tests') {
-      node() {
-        sh "echo 'Run Tests'"
-      }
+      sh "echo 'Run Tests'"
     }
 
     stage('Acceptance Tests') {
-      node() {
-        sh "echo 'Run Acceptance Tests'"
-      }
+      sh "echo 'Run Acceptance Tests'"
     }
   }
   post {
