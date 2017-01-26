@@ -1,5 +1,10 @@
 #!groovy
 pipeline {
+  agent  none
+  environment {
+    GIT_COMMITTER_NAME = "jenkins"
+    GIT_COMMITTER_EMAIL = "jenkins@jenkins.io"
+  }
   stages {
    stage("Build") {
       steps {

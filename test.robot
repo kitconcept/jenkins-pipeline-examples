@@ -10,6 +10,7 @@ ${BROWSER}              chrome
 
 Documentation   Jenkins Pipeline Job Acceptance Test
 Library         Selenium2Library  timeout=30  implicit_wait=0
+Library         DebugLibrary
 Test Setup      Test Setup
 Test Teardown   Close Browser
 
