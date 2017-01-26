@@ -6,25 +6,25 @@ stage('Build') {
 }
 
 stage('Static Code Analysis') {
-  node {
+  node() {
     sh "echo 'Run Static Code Analysis'"
   }
 }
 
 stage('Unit Tests') {
-  node {
+  node() {
     sh "echo 'Run Tests'"
   }
 }
 
 stage('Acceptance Tests') {
-  node {
+  node() {
     sh "echo 'Run Acceptance Tests'"
   }
 }
 
 stage('Nofification') {
-  node {
+  node() {
     sh "echo 'Send Notifications'"
   }
 }
