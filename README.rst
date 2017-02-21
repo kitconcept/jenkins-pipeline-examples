@@ -272,6 +272,15 @@ Publish HTML::
 
 Requires `HTML Publisher Plugin <https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin>`_.
 
+Code Coverage
+-------------
+
+The Cobertura plugin is not there yet:
+
+https://github.com/jenkinsci/cobertura-plugin/issues/50
+
+You can use the HTML publisher plugin instead though.
+
 
 Timeouts
 --------
