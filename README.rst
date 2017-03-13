@@ -305,6 +305,22 @@ Lock a resource that requires exclusive access::
 Requires `Lockable Resources Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Lockable+Resources+Plugin>`_.
 
 
+Icons/Badges
+------------
+
+The  `Groovy Postbuild Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Groovy+Postbuild+Plugin>`_ allows to annotate builds with icons or badges. E.g. add a version badge to the build::
+
+  version=readFile('uxf/dist/uxf/version.txt')
+  manager.addShortText("${version}")
+
+Add warnings badge to the build::
+
+  manager.addWarningBadge("Deployment to portal.vnc.biz failed!")
+
+Add warning message to the detailed build view::
+
+  manager.createSummary("warning.gif").appendText("<h1>Deployment to portal.vnc.biz failed!</h1>", false, false, false, "red")
+          
 Groovy Variables
 ----------------
 
