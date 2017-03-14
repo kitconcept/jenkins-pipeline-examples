@@ -14,6 +14,10 @@ before_install:
   - "sh -e /etc/init.d/xvfb start"
 install:
   - pip install -r requirements.txt
+  # mailserver
+  - sudo debconf-set-selections <<< "postfix postfix/mailname string your.hostname.com"
+  - sudo debconf-set-selections <<< "postfix postfix/main_mailer_type string 'Internet Site'"
+  - sudo apt-get install -y postfix
   - wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
   - sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
   - sudo apt-get update
