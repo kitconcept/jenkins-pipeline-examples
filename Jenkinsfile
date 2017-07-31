@@ -1,29 +1,63 @@
 #!groovy
+
 pipeline {
+
+  agent none
+
+  environment {
+    git_commit_message = ''
+    git_commit_diff = ''
+    git_commit_author = ''
+    git_commit_author_name = ''
+    git_commit_author_email = ''
+  }
+
   stages {
+
+    // Build
     stage('Build') {
-      node {
+      agent {
+        label 'master'
+      }
+      steps {
         checkout scm
       }
     }
 
+    // Static Code Analysis
     stage('Static Code Analysis') {
-      node() {
+      agent {
+        label 'master'
+      }
+      steps {
+        checkout scm
         sh "echo 'Run Static Code Analysis'"
       }
     }
 
+    // Unit Tests
     stage('Unit Tests') {
-      node() {
-        sh "echo 'Run Tests'"
+      agent {
+        label 'master'
+      }
+      steps {
+        checkout scm
+        sh "echo 'Run Unit Tests'"
       }
     }
 
+    // Acceptance Tests
     stage('Acceptance Tests') {
-      node() {
+      agent {
+        label 'master'
+      }
+      steps {
+        deleteDir()
+        checkout scm
         sh "echo 'Run Acceptance Tests'"
       }
     }
+
   }
   post {
     always {
