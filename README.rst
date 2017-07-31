@@ -40,7 +40,7 @@ Create pipeline steps::
     }
   }
 
-Share data between pipelines::
+Use stash/unstash to share data between pipelines::
 
   stage('Build') {
     node {
@@ -62,6 +62,27 @@ The 'Build' pipeline step checks out the repository and runs 'npm install'. The 
 The 'Test' pipeline steps unstashes the 'node_modules' stash (lookup by name) and allows to use it (e.g. to run tests on the installed modules).
 
 Note that files are discarded at the end of the build. If you want to keep the artifacts use 'stash/unstash'.
+
+In order to start with a clean build it is essential to clear the workspace before a checkout or an unstash::
+
+  stage('Build') {
+    node {
+      deleteDir()
+      checkout scm
+      sh "npm install"
+      stash includes: 'node_modules/', name: 'node_modules'
+    }
+  }
+
+  stage('Test') {
+    node {
+      deleteDir()
+      unstash 'node_modules'
+      sh "npm run test"
+    }
+  }
+
+When dealing with build artifacts with lots of file (e.g. node_modules or buildout) stashing/unstashing can take quite a while.
 
 
 Declarative Pipeline
@@ -125,7 +146,10 @@ Test Results
 Include jUnit-based test results::
 
   sh "bin/test"
-  step([$class: 'JUnitResultArchiver', testResults: 'parts/test/testreports/*.xml'])
+  step([
+    $class: 'JUnitResultArchiver',
+    testResults: 'parts/test/testreports/*.xml'
+  ])
 
 
 Email Notifications
