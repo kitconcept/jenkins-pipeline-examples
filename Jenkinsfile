@@ -20,6 +20,7 @@ pipeline {
         label 'master'
       }
       steps {
+        deleteDir()
         checkout scm
       }
     }
@@ -30,6 +31,7 @@ pipeline {
         label 'master'
       }
       steps {
+        deleteDir()
         checkout scm
         sh "echo 'Run Static Code Analysis'"
       }
@@ -41,6 +43,7 @@ pipeline {
         label 'master'
       }
       steps {
+        deleteDir()
         checkout scm
         sh "echo 'Run Unit Tests'"
       }
@@ -60,9 +63,6 @@ pipeline {
 
   }
   post {
-    always {
-      deleteDir()
-    }
     success {
       mail to:"me@example.com", subject:"SUCCESS: ${currentBuild.fullDisplayName}", body: "Yay, we passed."
     }
