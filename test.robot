@@ -42,6 +42,11 @@ Scenario: Create Pipeline Job
   Click Element  css=.org_jenkinsci_plugins_workflow_job_WorkflowJob
   Click button  OK
 
+Scenario: Jenkins job has been created
+  Go To  ${SERVER}
+  Wait until page contains element  css=#projectstatus
+  Page should contain  Pipeline
+
 
 *** Keywords ***
 
