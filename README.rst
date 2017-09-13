@@ -356,6 +356,16 @@ Use Groovy variable::
 
   currentBuild.description = 'VNCuxf Mail (${version})'
 
+Declarative Pipeline::
+
+  script {
+    VERSION = sh(
+      script: 'cat package.json | python -c "import sys, json; print json.load(sys.stdin)[\'version\']"',
+      returnStdout: true
+    )
+  }
+  sh "echo VERSION"
+  sh "echo ${VERSION}"
 
 Global Variables
 ----------------
