@@ -360,10 +360,10 @@ Declarative Pipeline::
 
   script {
     VERSION = sh(
-      script: 'cat package.json | python -c "import sys, json; print json.load(sys.stdin)[\'version\']"',
+      script: 'cat uxf/package.json | python -c "import sys, json; print json.load(sys.stdin)[\'version\']"',
       returnStdout: true
-    )
-  }
+  ).trim()
+
   sh "echo VERSION"
   sh "echo ${VERSION}"
 
