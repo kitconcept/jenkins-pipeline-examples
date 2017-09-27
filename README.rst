@@ -138,7 +138,56 @@ This allows to write a cleaner pipeline::
     }
   }
 
-todo...
+Declarative Pipeline Post Actions (global)::
+
+  #!groovy
+  pipeline {
+    stages {
+      ...
+    }
+    post {
+      // always means, well, always run.
+      always {
+        echo "Hi there"
+      }
+      // changed means when the build status is different than the previous build's status.
+      changed {
+        echo "I'm different"
+      }
+      // success, failure, unstable all run if the current build status is successful, failed, or unstable, respectively
+      success {
+        echo "I succeeded"
+        archive "**/*"
+      }
+    }
+  }
+      
+Declarative Pipeline Post Actions (stage)::
+
+  #!groovy
+  pipeline {
+    stages {
+      stage("first stage") {
+        when { ... }
+        post {
+          // always means, well, always run.
+          always {
+            echo "Hi there"
+          }
+          // changed means when the build status is different than the previous build's status.
+          changed {
+            echo "I'm different"
+          }
+          // success, failure, unstable all run if the current build status is successful, failed, or unstable, respectively
+          success {
+            echo "I succeeded"
+            archive "**/*"
+          }
+        }
+      }
+    }
+  }
+
 
 Test Results
 ------------
