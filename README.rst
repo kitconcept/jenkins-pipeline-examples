@@ -188,6 +188,8 @@ Declarative Pipeline Post Actions (stage)::
     }
   }
 
+Post action docs: https://github.com/jenkinsci/pipeline-model-definition-plugin/wiki/Syntax-Reference
+
 
 Test Results
 ------------
