@@ -190,6 +190,32 @@ Declarative Pipeline Post Actions (stage)::
 
 Post action docs: https://github.com/jenkinsci/pipeline-model-definition-plugin/wiki/Syntax-Reference
 
+Declarative Pipeline Parallel Build Steps::
+
+  // --- STATIC CODE ANALYSIS ---
+  stage('Static Code Analysis') {
+    parallel {
+      stage('Backend') {
+        agent {
+          label "node"
+        }
+        steps {
+          sh "ls -al"
+          }
+        }
+      }
+      stage('Frontend') {
+        agent {
+          label "node"
+        }
+        steps {
+            sh "ls -al"
+          }
+        }
+      }
+    }
+  }
+
 
 Test Results
 ------------
