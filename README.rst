@@ -243,6 +243,13 @@ Send email notifications::
 
 Requires `Email-ext Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Email-ext+plugin>`_.
 
+Slack Notifications
+-------------------
+
+Add Slack notification::
+
+  slackSend channel: '#general', color: 'good', message: '[${currentBuild.result}] #${env.BUILD_NUMBER} ${env.BUILD_URL}', teamDomain: 'kitconcept', token: '<ADD-TOKEN-HERE>'
+
 
 Robot Framework
 ---------------
