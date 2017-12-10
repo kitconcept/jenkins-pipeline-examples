@@ -1,6 +1,26 @@
 Jenkins Pipeline Examples (by kitconcept)
 ==============================================================================
 
+Options
+-------
+
+Disable Concurrent Builds::
+
+  pipeline {
+
+    agent any
+
+    options {
+      disableConcurrentBuilds()
+    }
+
+Set global timeout::
+
+  options {
+    timeout(time: 30, unit: 'MINUTES')
+  }
+
+
 Git Checkout
 ------------
 
