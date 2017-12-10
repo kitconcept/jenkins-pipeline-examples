@@ -13,6 +13,8 @@ Disable Concurrent Builds::
     options {
       disableConcurrentBuilds()
     }
+    ...
+  }
 
 Set global timeout::
 
