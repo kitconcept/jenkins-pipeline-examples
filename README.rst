@@ -473,6 +473,17 @@ Declarative Pipeline::
   sh "echo VERSION"
   sh "echo ${VERSION}"
 
+Declarative Pipeline (ignore exit code)::
+
+  script {
+    psiExitCode = sh(
+      script: 'yarn run psi',
+      returnStdout: true,
+      returnStatus: true
+    )
+  }
+
+
 Global Variables
 ----------------
 
