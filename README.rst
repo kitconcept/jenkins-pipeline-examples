@@ -4,7 +4,7 @@ Jenkins Pipeline Examples (by kitconcept)
 Options
 -------
 
-Disable Concurrent Builds::
+Disable concurrent builds::
 
   pipeline {
 
@@ -20,6 +20,12 @@ Set global timeout::
 
   options {
     timeout(time: 30, unit: 'MINUTES')
+  }
+
+Discard old builds and artifacts::
+
+  options {
+    buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
   }
 
 
