@@ -1,2 +1,2 @@
-robotframework
-robotframework-selenium2library
+robotframework==3.0
+robotframework-seleniumlibrary==3.1.1
