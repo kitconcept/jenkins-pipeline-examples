@@ -28,6 +28,35 @@ Discard old builds and artifacts::
     buildDiscarder(logRotator(numToKeepStr: '30', artifactNumToKeepStr: '30'))
   }
 
+Parameters
+----------
+
+Jenkins allows to ask the user for job paremeters before the job execution.
+Possible parameters are boolean, choice, file, text, password, run, or string::
+
+  pipeline {
+      agent any
+
+      parameters {
+          booleanParam(defaultValue: true, description: '', name: 'booleanExample')
+          string(defaultValue: "TEST", description: 'What environment?', name: 'stringExample')
+          text(defaultValue: "This is a multiline\n text", description: "Multiline Text", name: "textExample")
+          choice(choices: 'US-EAST-1\nUS-WEST-2', description: 'What AWS region?', name: 'choiceExample')
+          password(defaultValue: "Password", description: "Password Parameter", name: "passwordExample")
+      }
+
+      stages {
+          stage("my stage") {
+              steps {
+                  echo "booleanExample: ${params.booleanExample}"
+                  echo "stringExample: ${params.stringExample}"
+                  echo "textExample: ${params.textExample}"
+                  echo "choiceExample: ${params.choiceExample}"
+                  echo "passwordExample: ${params.passwordExample}"
+              }
+          }
+      }
+  }
 
 Git Checkout
 ------------
@@ -189,7 +218,7 @@ Declarative Pipeline Post Actions (global)::
       }
     }
   }
-      
+
 Declarative Pipeline Post Actions (stage)::
 
   #!groovy
@@ -456,7 +485,7 @@ Add warnings badge to the build::
 Add warning message to the detailed build view::
 
   manager.createSummary("warning.gif").appendText("<h1>Deployment to portal.vnc.biz failed!</h1>", false, false, false, "red")
-          
+
 Groovy Variables
 ----------------
 
