@@ -58,6 +58,8 @@ Possible parameters are boolean, choice, file, text, password, run, or string::
       }
   }
 
+See `Jenkins docs on Parametrized pipelines <https://github.com/jenkinsci/pipeline-model-definition-plugin/wiki/Parametrized-pipelines>`_ for more details.
+
 Git Checkout
 ------------
 
@@ -67,6 +69,12 @@ Git Checkout::
 
 The Jenkinsfile job configuration already contains the repository URL. Therefore a checkout is as simple as that. See `this <http://stackoverflow.com/questions/38198878/jenkins-pipeline-build-github-pull-request#answer-38212467>`_ for details.
 
+Git
+---
+
+Latest git tag::
+
+  sh(returnStdout: true, script: "git tag --sort version:refname | tail -1").trim()
 
 Clean Workspace
 ---------------
