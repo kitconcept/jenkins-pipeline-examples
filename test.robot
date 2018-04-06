@@ -22,7 +22,7 @@ Scenario: Jenkins is up and running
   Page Should Contain  Jenkins
   # Wait until page contains element  css=#header
   Page should not contain  log in
-  Wait until page contains element  css=#tasks
+  # Wait until page contains element  css=#tasks
   Page should contain element  xpath=//a[@href='/manage']
 
 # Scenario: Install Jenkins Plugins
