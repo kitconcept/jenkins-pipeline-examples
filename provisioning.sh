@@ -1,9 +1,17 @@
-pip install robotframework
-pip install robotframework-selenium2library
+# pip install robotframework
+# pip install robotframework-selenium2library
+# Java 8 installation
+sudo apt-get install -y python-software-properties debconf-utils
+sudo add-apt-repository -y ppa:webupd8team/java
+sudo apt-get update
+echo "oracle-java8-installer shared/accepted-oracle-license-v1-1 select true" | sudo debconf-set-selections
+sudo apt-get install -y oracle-java8-installer
+# Jenkins installation
 wget -q -O - https://jenkins-ci.org/debian/jenkins-ci.org.key | sudo apt-key add -
 sudo sh -c 'echo deb http://pkg.jenkins-ci.org/debian-stable binary/ > /etc/apt/sources.list.d/jenkins.list'
 sudo apt-get update
 sudo apt-get install -y jenkins
+sudo apt-get install -y git-core
 sudo service jenkins restart
 sleep 10
 while [[ ! -f /var/lib/jenkins/config.xml ]]; do sleep 2; done;
