@@ -39,6 +39,7 @@ install:
   - sleep 15
   - sudo service jenkins status
   - ps ax | grep java
+  - wget http://localhost:8080
   - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5 && echo "."; done;
   - sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
   - java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
