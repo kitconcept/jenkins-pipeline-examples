@@ -28,7 +28,8 @@ install:
   - sudo apt-get update
   - sudo apt-get install  -y jenkins
   - sudo service jenkins restart
-  - sleep 10
+  - sleep 20
+  - curl -v http://localhost:8080
   - while [[ ! -f /var/lib/jenkins/config.xml ]]; do sleep 2; done;
   - sudo -u jenkins sed -i "s@<useSecurity>true<\/useSecurity>@<useSecurity>false<\/useSecurity>@g" /var/lib/jenkins/config.xml
   # enable JNLP port, see https://github.com/aespinosa/docker-jenkins/issues/24
