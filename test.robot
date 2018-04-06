@@ -20,7 +20,7 @@ Scenario: Jenkins is up and running
   Go to  ${SERVER}
   Wait until page contains  Jenkins
   Page Should Contain  Jenkins
-  Wait until page contains element  css=#header
+  # Wait until page contains element  css=#header
   Page should not contain  log in
   Wait until page contains element  css=#tasks
   Page should contain element  xpath=//a[@href='/manage']
