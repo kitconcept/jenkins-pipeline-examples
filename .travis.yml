@@ -36,10 +36,10 @@ install:
   # - cat /var/lib/jenkins/config.xml
   - sudo -u jenkins cp /var/lib/jenkins/jenkins.install.UpgradeWizard.state /var/lib/jenkins/jenkins.install.InstallUtil.lastExecVersion
   - sudo service jenkins restart
-  - sleep 10
+  - sleep 15
   - sudo service jenkins status
   - ps ax | grep java
-  - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5; done;
+  - while [[ $(curl -s -w "%{http_code}" http://localhost:8080 -o /dev/null) != "200" ]]; do  sleep 5 && echo "."; done;
   - sudo wget http://localhost:8080/jnlpJars/jenkins-cli.jar
   - java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin git
   - java -jar jenkins-cli.jar -s http://localhost:8080 install-plugin checkstyle
