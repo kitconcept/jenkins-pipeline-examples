@@ -1,0 +1,18 @@
+node {
+    git 'https://github.com/plone/plone.restapi.git'
+    script {
+      gitCommit = sh(
+        script: 'git rev-parse HEAD',
+        returnStdout: true
+      ).trim()
+      sh "echo ${gitCommit}"
+      addBadge icon: 'completed.gif', id: 'gitcommit', link: '', text: gitCommit
+      addBadge id: 'githash', link: '', text: gitCommit
+      gitIsTag = sh(
+        script: 'git describe --exact-match --tags HEAD 2>&1 >/dev/null | grep -c fatal',
+        returnStdout: true
+      )
+      sh "echo ${gitIsTag}"
+      addBadge id: 'gitistag', link: '', text: gitIsTag
+    }
+}
