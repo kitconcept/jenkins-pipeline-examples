@@ -23,7 +23,7 @@ Scenario: Jenkins is up and running
   # Wait until page contains element  css=#header
   Page should not contain  log in
   # Wait until page contains element  css=#tasks
-  ${html}=  get text  xpath=//body
+  ${html}=  Get source
   Log  ${html}  WARN
   Wait until page contains element  xpath=//a[@href='/manage']
   Page should contain element  xpath=//a[@href='/manage']
