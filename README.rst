@@ -469,6 +469,23 @@ Lock a resource that requires exclusive access::
 
 Requires `Lockable Resources Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Lockable+Resources+Plugin>`_.
 
+Lock multiple stages in a declarative pipeline::
+
+  stage('Parent') {
+    options {
+      lock('myLock')
+    }
+    stages {
+      stage('first child') {
+        ...
+      }
+      stage('second child') {
+        ...
+      }
+    }
+  }
+
+NOT THERE YET! https://issues.jenkins-ci.org/browse/JENKINS-43336
 
 Icons/Badges
 ------------
