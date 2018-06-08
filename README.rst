@@ -97,6 +97,9 @@ Create pipeline steps::
     }
   }
 
+Stash/Unstash
+^^^^^^^^^^^^^
+
 Use stash/unstash to share data between pipelines::
 
   stage('Build') {
@@ -119,6 +122,9 @@ The 'Build' pipeline step checks out the repository and runs 'npm install'. The 
 The 'Test' pipeline steps unstashes the 'node_modules' stash (lookup by name) and allows to use it (e.g. to run tests on the installed modules).
 
 Note that files are discarded at the end of the build. If you want to keep the artifacts use 'stash/unstash'.
+
+Clean Workspace
+^^^^^^^^^^^^^^^
 
 In order to start with a clean build it is essential to clear the workspace before a checkout or an unstash::
 
