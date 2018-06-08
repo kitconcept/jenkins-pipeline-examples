@@ -58,6 +58,27 @@ Possible parameters are boolean, choice, file, text, password, run, or string::
       }
   }
 
+Triggers / Scheduling
+---------------------
+
+Trigger build regularly with cron::
+
+  pipeline {
+      agent any
+      triggers {
+          cron('H */4 * * 1-5')
+      }
+      stages {
+          stage('Example') {
+              steps {
+                  echo 'Hello World'
+              }
+          }
+      }
+  }
+
+Triggers Pipeline Syntax docs: `https://jenkins.io/doc/book/pipeline/syntax/#triggers`_.
+
 Git Checkout
 ------------
 
