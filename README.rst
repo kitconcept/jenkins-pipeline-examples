@@ -361,6 +361,7 @@ Add Slack notification::
 
   slackSend channel: '#general', color: 'good', message: '[${currentBuild.result}] #${env.BUILD_NUMBER} ${env.BUILD_URL}', teamDomain: 'kitconcept', token: '<ADD-TOKEN-HERE>'
 
+Tutorial how to set up Jenkins and Slack: https://medium.com/appgambit/integrating-jenkins-with-slack-notifications-4f14d1ce9c7a
 
 Robot Framework
 ---------------
