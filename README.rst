@@ -171,6 +171,19 @@ The 'Test' pipeline steps unstashes the 'node_modules' stash (lookup by name) an
 
 Note that files are discarded at the end of the build. If you want to keep the artifacts use 'stash/unstash'.
 
+Artifacts
+^^^^^^^^^
+
+Archive artifacts at the end of the job::
+
+    post {
+        always {
+            archiveArtifacts artifacts: 'build/libs/**/*.jar', fingerprint: true, allowEmptyArchive: true
+        }
+   }
+
+"allowEmptyArchive: true" makes the build not fail when no artifacts are found. "fingerprint: true" allows to track artifacts over nodes.
+
 Clean Workspace
 ^^^^^^^^^^^^^^^
 
