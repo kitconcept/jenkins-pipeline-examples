@@ -505,6 +505,12 @@ Publish HTML::
 
 Requires `HTML Publisher Plugin <https://wiki.jenkins-ci.org/display/JENKINS/HTML+Publisher+Plugin>`_.
 
+For some reports, such as lighthouse you need to relax the content security policy in your /etc/default/jenkins file:
+
+```
+JAVA_ARGS="-Dhudson.model.DirectoryBrowserSupport.CSP=\"sandbox allow-scripts; default-src *; style-src * http://* 'unsafe-inline' 'unsafe-eval'; script-src 'self' http://* 'unsafe-inline' 'unsafe-eval'; img-src 'self' data:\""
+```
+
 Code Coverage
 -------------
 
