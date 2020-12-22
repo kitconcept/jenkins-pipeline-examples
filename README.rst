@@ -365,6 +365,15 @@ Send email notifications::
     attachLog: true,
   )
 
+Send email notifications to build requester and/or committers since last successful build::
+
+  emailext (
+    subject: "FAILURE: #${env.BUILD_NUMBER} ${env.JOB_NAME}",
+    body: "Hey, it seems one of your recent commits broke the build, please check ${env.BUILD_URL}.",
+    attachLog: true,
+    recipientProviders: [[$class: 'RequesterRecipientProvider'], [$class:'CulpritsRecipientProvider']]
+  )
+      
 Requires `Email-ext Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Email-ext+plugin>`_.
 
 Slack Notifications
