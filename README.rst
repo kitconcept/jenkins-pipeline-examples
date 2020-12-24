@@ -447,7 +447,7 @@ The `Port Allocator Plugin <https://wiki.jenkins-ci.org/display/JENKINS/Port+All
 Static Code Analysis
 --------------------
 
-Pep8/Flake8:
+Pep8/Flake8::
 
   timeout(time: 5, unit: 'MINUTES') {
     sh 'bin/code-analysis'
