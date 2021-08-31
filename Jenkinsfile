@@ -20,7 +20,7 @@ pipeline {
         label 'node'
       }
       steps {
-        deleteDir()
+        delDir()
         checkout scm
       }
     }
